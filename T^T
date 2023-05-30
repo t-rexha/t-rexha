@@ -1,0 +1,249 @@
+from tkinter import *
+from tkinter import messagebox
+from tkinter.ttk import Combobox
+
+
+class Login:
+    def __init__(self, root):
+        self.root = root
+        self.root.title('Barangay Profiling')
+        self.root.geometry('1000x650')
+        self.root.resizable(False, False)
+        root.configure(background="light blue")
+
+        frame_hp = Frame(root, bg="white")
+        frame_hp.place(x=150, y=80, width=700, height=490)
+
+        heading = Label(root, font=("arial black", 30, 'bold'), text='WELCOME!', bg="white", fg="black")
+        heading.place(x=180, y=100)
+
+        residentButton = Button(root, text='RESIDENT', command=self.resident_login, font=('arial black', 15), background="light blue", width=20, height=1)
+        residentButton.place(x=350, y=240)
+
+        adminButton = Button(root, text='ADMIN', command=self.admin, font=('arial black', 15), background="light blue", width=20, height=1)
+        adminButton.place(x=350, y=300)
+
+        txt = Label(root, font=('arial', 10), text="don't have an account?", bg="white", fg='black').place(x=421, y=350)
+        txt1 = Label(root, font=('arial', 10), text="here", bg="white",fg='black').place(x=605, y=350)
+
+        fpButton = Button(root, text='register', command=self.register, bd=0, bg="white", fg='blue', font=('arial', 10)).place(x=556, y=349)
+
+    def resident_login(self):
+
+        self.login_frame = Frame(self.root, bg='white')
+        self.login_frame.place(x=150, y=80, width=700, height=490)
+
+        #  tile frame
+        title = Label(self.login_frame, text='Sign in to your account', font=('arial black', 20), bg='white', fg='black')
+        title.place(x=170, y=50)
+
+        #  login
+        user = Label(self.login_frame, text='name', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        user.place(x=190, y=120)
+        self.username = Entry(self.login_frame, font=('century gothic', 10), bg='white', fg='black')
+        self.username.place(x=190, y=140, height=25, width=330)
+
+        phone = Label(self.login_frame, text='phone number/email address', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        phone.place(x=190, y=170)
+        self.phone = Entry(self.login_frame, font=('century gothic', 10), bg='white', fg='black')
+        self.phone.place(x=190, y=190, height=25, width=330)
+
+        password = Label(self.login_frame, text='password', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        password.place(x=190, y=220)
+        self.password = Entry(self.login_frame, font=('century gothic', 10), bg='white', fg='black')
+        self.password.place(x=190, y=240, height=25, width=330)
+
+        forgot_pass = Button(self.login_frame, text='forgot password?', bd=0, bg='white', fg='blue', font=('arial', 8, 'bold'))
+        forgot_pass.place(x=416, y=270)
+
+        cancel = Button(self.login_frame, text=' cancel ', bd=3, bg='dark blue', fg='white', font=('century gothic', 10, 'bold'), command=self.back)
+        cancel.place(x=240, y=330)
+
+        login = Button(self.login_frame, text=' login ', command=self.requestDoc, bd=3, bg='dark blue', fg='white', font=('century gothic', 10, 'bold'))
+        login.place(x=380, y=330)
+
+
+    def requestDoc(self):
+        if self.username.get() == "" or self.phone.get() == "" or self.password.get() == "":
+            messagebox.showerror("ERROR", "All fields are required", parent=self.root)
+
+        self.req_frm = Frame(self.root, bg='white')
+        self.req_frm.place(x=300, y=0, width=700, height=650)
+
+        req_frm1 = Frame(self.root, bg='light blue')
+        req_frm1.place(x=90, y=0, width=350, height=650)
+
+        title1 = Label(root, font=("arial black", 20, 'bold'), text='PRICE LIST', bg="light blue", fg="black")
+        title1.place(x=50, y=50)
+
+        brgyclr_price = Label(root, font=('arial', 15), text='Barangay Clearance', bg='light blue').place(x=50, y=130)
+        brgyclr_price1 = Label(root, font=('arial', 15), text='P100.00', bg='light blue').place(x=290, y=130)
+
+        cedula_price = Label(root, font=('arial', 15), text='Cedula', bg='light blue').place(x=50, y=170)
+        cedula_price1 = Label(root, font=('arial', 15), text='P30.00', bg='light blue').place(x=290, y=170)
+
+        bpermit_price = Label(root, font=('arial', 15), text='Business Permit', bg='light blue').place(x=50, y=210)
+        bpermit_price1 = Label(root, font=('arial', 15), text='P200.00', bg='light blue').place(x=290, y=210)
+
+        heading = Label(root, font=("arial", 20, 'bold'), text='Request Document', fg="black", bg='white')
+        heading.place(x=460, y=51)
+
+        fullname = Label(root, font=("arial", 10, 'bold'), text='Full Name', fg="black", bg='white')
+        fullname.place(x=465, y=100)
+        fullname1 = Entry(root, font=("arial", 10), bd="4", fg="black", width=25)
+        fullname1.place(x=465, y=125, width=500)
+
+        req_age = Label(root, font=("arial", 10, 'bold'), text='Age', fg="black", bg='white')
+        req_age.place(x=465, y=160)
+        req_age1 = Entry(root, font=("arial", 10), bd="4", fg="black", width=25)
+        req_age1.place(x=465, y=185, width='50')
+
+        civil_stat = Label(root, font=("arial", 10, 'bold'), text='Civil Status', fg="black", bg='white')
+        civil_stat.place(x=600, y=160)
+        # dropmenu
+        options = ["Single", "Married", "Separated/Divorced", "Widowed"]
+        combo = Combobox(root, values=options)
+        combo.place(x=600, y=185)
+
+        ctznshp = Label(root, font=("arial", 10, 'bold'), text='Citizenship', fg="black", bg='white')
+        ctznshp.place(x=465, y=225)
+        ctzshp1 = Entry(root, font=("arial", 10), bd="4", fg="black", width=25)
+        ctzshp1.place(x=465, y=250)
+
+        res_yr = Label(root, font=("arial", 10, 'bold'), text='Residence Year', fg="black", bg='white')
+        res_yr.place(x=700, y=225)
+        res_yr1 = Entry(root, font=("arial", 10), bd="4", fg="black", width=25)
+        res_yr1.place(x=700, y=250)
+
+        address = Label(root, font=("arial", 10, 'bold'), text='Address', fg="black", bg='white')
+        address.place(x=465, y=285)
+        address1 = Entry(root, font=("arial", 10), bd="4", fg="black", width=25)
+        address1.place(x=465, y=310)
+
+        date_issued = Label(root, font=("arial", 10, 'bold'), text='Date Issued', fg="black", bg='white')
+        date_issued.place(x=700, y=285)
+        date_issued1 = Entry(root, font=("arial", 10), bd="4", fg="black", width=25)
+        date_issued1.place(x=700, y=310)
+
+        payment = Label(root, font=("arial", 10, 'bold'), text='Payment Method', fg="black", bg='white')
+        payment.place(x=465, y=360)
+        options = ["G-cash", "Cash on Pick-up"]
+        combo = Combobox(root, values=options)
+        combo.place(x=600, y=360)
+
+        purpose = Label(root, font=("arial", 10, 'bold'), text='Purpose', fg="black", bg='white')
+        purpose.place(x=465, y=390)
+        purpose1 = Entry(root, font=("arial", 10), bd="2", fg="black", width=25)
+        purpose1.place(x=465, y=410, height=100, width=500)
+
+        req_logout = Button(root, font=("arial", 10, 'bold'), text='Log Out', bd="4", bg="brown",
+                                fg="white")
+        req_logout.place(x=50, y=550)
+
+        confirmrequest = Button(root, font=("arial", 10, 'bold'), text='Confirm Request', bd="4", bg="dark blue",
+                                fg="white")
+        confirmrequest.place(x=845, y=550)
+
+    def admin(self):
+        self.admin_frame = Frame(root, bg='white')
+        self.admin_frame.place(x=150, y=80, width=700, height=490)
+
+        title_admin = Label(root, text='Sign in to your account', font=('arial black', 20), bg='white', fg='black')
+        title_admin.place(x=330, y=140)
+
+        #  admin login
+        user_admin = Label(self.admin_frame, text='name', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        user_admin.place(x=190, y=120)
+        self.username_ad = Entry(self.admin_frame, font=('century gothic', 10), bg='white', fg='black')
+        self.username_ad.place(x=190, y=140, height=25, width=330)
+
+        phone_admin = Label(self.admin_frame, text='phone number/email address', font=('century gothic', 10, 'bold'), bg='white',
+                      fg='black')
+        phone_admin.place(x=190, y=170)
+        self.phone_ad = Entry(self.admin_frame, font=('century gothic', 10), bg='white', fg='black')
+        self.phone_ad.place(x=190, y=190, height=25, width=330)
+
+        password_admin = Label(self.admin_frame, text='password', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        password_admin.place(x=190, y=220)
+        self.password_ad = Entry(self.admin_frame, font=('century gothic', 10), bg='white', fg='black')
+        self.password_ad.place(x=190, y=240, height=25, width=330)
+
+        forgot_pass = Button(self.admin_frame, text='forgot password?', bd=0, bg='white', fg='blue',
+                             font=('arial', 8, 'bold'))
+        forgot_pass.place(x=416, y=270)
+
+        cancel1 = Button(self.admin_frame, text=' cancel ', bd=3, bg='dark blue', fg='white',
+                        font=('century gothic', 10, 'bold'), command=self.back)
+        cancel1.place(x=240, y=330)
+
+        login1 = Button(self.admin_frame, text=' login ', command=self.admin_hp, bd=3, bg='dark blue', fg='white',
+                       font=('century gothic', 10, 'bold'))
+        login1.place(x=380, y=330)
+
+    def admin_hp(self):
+        self.admin_frm = Frame(root, bg='white')
+        self.admin_frm.place(x=150, y=80, width=700, height=490)
+
+        title_admin = Label(root, text='WELCOME!', font=('arial black', 20), bg='white', fg='black')
+        title_admin.place(x=180, y=100)
+
+        resident_list = Button(root, text='RESIDENT LIST', font=('arial black', 15), background="light blue",
+                          width=20, height=1)
+        resident_list.place(x=350, y=240)
+        req_list = Button(root, text='REQUEST LIST', font=('arial black', 15), background="light blue",
+                             width=20, height=1)
+        req_list.place(x=350, y=300)
+
+        admin_logout = Button(root, font=("arial", 10, 'bold'), text='Log Out', bd="4", bg="dark blue",
+                            fg="white")
+        admin_logout.place(x=180, y=510)
+
+    def register(self):
+
+        self.register_frame = Frame(root, bg="white")
+        self.register_frame.place(x=150, y=80, width=700, height=490)
+
+        #  tile frame
+        title = Label(root, text='Sign up', font=('arial black', 20), bg='white', fg='black')
+        title.place(x=170, y=95)
+
+        #  login
+        user = Label(root, text='enter name', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        user.place(x=190, y=170)
+        self.username = Entry(root, font=('century gothic', 10), bg='white', fg='black')
+        self.username.place(x=190, y=190, height=25, width=330)
+
+        phone = Label(root, text='enter phone number', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        phone.place(x=190, y=230)
+        self.phone = Entry(root, font=('century gothic', 10), bg='white', fg='black')
+        self.phone.place(x=190, y=250, height=25, width=330)
+
+        age = Label(root, text='enter age', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        age.place(x=190, y=290)
+        self.age = Entry(root, font=('century gothic', 10), bg='white', fg='black')
+        self.age.place(x=190, y=310, height=25, width=330)
+
+        add = Label(root, text='address', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        add.place(x=190, y=350)
+        self.add = Entry(root, font=('century gothic', 10), bg='white', fg='black')
+        self.add.place(x=190, y=370, height=25, width=330)
+
+        password = Label(root, text='password', font=('century gothic', 10, 'bold'), bg='white', fg='black')
+        password.place(x=190, y=410)
+        self.password = Entry(root, font=('century gothic', 10), bg='white', fg='black')
+        self.password.place(x=190, y=430, height=25, width=330)
+
+        cancel = Button(root, text='cancel', bd=3, bg='dark blue', fg='white', font=('century gothic', 10, 'bold'))
+        cancel.place(x=240, y=480)
+
+        login = Button(root, text='sign up', bd=3, bg='dark blue', fg='white',
+                       font=('century gothic', 10, 'bold'))
+        login.place(x=380, y=480)
+
+    def back(self):
+        self.login_frame.destroy()
+
+
+root = Tk()
+obj = Login(root)
+root.mainloop()
